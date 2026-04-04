@@ -2,6 +2,10 @@ import sqlite3
 
 
 def init_db():
+    """
+    Initializes the ebookstore database by creating the 'book' and 'author'
+    tables if they do not exist and populating them with default values.
+    """
     try:
         # 1. Connect and create cursor
         with sqlite3.connect("ebookstore.db") as db:
@@ -58,6 +62,15 @@ def init_db():
 
 
 def add_book(id, title, author_id, qty):
+    """
+    Inserts a new book record into the book table.
+
+    Args:
+        id (int): The unique 4-digit ID for the book.
+        title (str): The title of the book.
+        author_id (int): The ID of the author (foreign key).
+        qty (int): The quantity of books in stock.
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
 
@@ -69,6 +82,15 @@ def add_book(id, title, author_id, qty):
 
 
 def update_book(id, column, new_value):
+    """
+    Updates a specific attribute of a book record using
+    dynamic column selection.
+
+    Args:
+        id (int): The ID of the book to update.
+        column (str): The column name to be updated (e.g., 'title', 'qty').
+        new_value (obj): The new data to be saved to the specified column.
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
 
@@ -79,6 +101,14 @@ def update_book(id, column, new_value):
 
 
 def get_book_details(id):
+    """
+    Retrieves the title, author name, and country for a specific book ID.
+
+    Args:
+        id (int): The ID of the book to search for.
+    Returns:
+        tuple: (title, author_name, country) if found, otherwise None.
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
 
@@ -90,6 +120,13 @@ def get_book_details(id):
 
 
 def view_all_books():
+    """
+    Retrieves detailed information for all books in the inventory,
+    joining with the author table for complete metadata.
+
+    Returns:
+        list: A list of tuples containing (title, author_name, country).
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
 
@@ -101,6 +138,12 @@ def view_all_books():
 
 
 def delete_book(id):
+    """
+    Permanently removes a book record from the database based on its ID.
+
+    Args:
+        id (int): The ID of the book to be deleted.
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
 
@@ -111,6 +154,14 @@ def delete_book(id):
 
 
 def book_exists(id):
+    """
+    Checks if a specific book ID already exists in the book table.
+
+    Args:
+        id (int): The ID to check.
+    Returns:
+        bool: True if the ID exists, False otherwise.
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
         cursor.execute("SELECT id FROM book WHERE id = ?", (id,))
@@ -119,7 +170,15 @@ def book_exists(id):
 
 
 def author_exists(id):
-    """Checks if the author ID exists in the author table."""
+    """
+    Checks if a specific author ID exists in the author table to maintain
+    referential integrity.
+
+    Args:
+        id (int): The author ID to check.
+    Returns:
+        bool: True if the author exists, False otherwise.
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
         cursor.execute("SELECT id FROM author WHERE id = ?", (id,))
@@ -128,7 +187,14 @@ def author_exists(id):
 
 
 def add_author(id, name, country):
-    """Adds a new author to the author table."""
+    """
+    Inserts a new author record into the author table.
+
+    Args:
+        id (int): The unique 4-digit ID for the author.
+        name (str): The name of the author.
+        country (str): The author's country of origin.
+    """
     with sqlite3.connect("ebookstore.db") as db:
         cursor = db.cursor()
         cursor.execute("INSERT INTO author(id, name, country) VALUES(?,?,?)",
