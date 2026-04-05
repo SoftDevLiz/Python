@@ -1,0 +1,63 @@
+/* General Page Styling */
+body {
+    font-family: 'Verdana', sans-serif; /* Applied font family */
+    background-color: #f4f7f6; /* Set background color for entire page */
+    color: #333333; /* Paragraph text color for high contrast */
+    line-height: 1.6;
+    margin: 40px auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+/* Heading Hierarchy and Colors */
+h1 {
+    color: #2c3e50; /* Main heading color */
+    font-size: 2.5rem; /* Adjusted size for hierarchy */
+    text-align: center; /* Adjusted alignment */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #e67e22; /* Subheading color */
+    font-size: 1.8rem; /* Adjusted size for hierarchy */
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+/* Paragraph and Spacing */
+p {
+    margin-bottom: 20px; /* Margin to prevent clutter */
+    padding: 5px 0; /* Padding for breathing room */
+}
+
+/* Image Styling */
+img {
+    display: block;
+    margin: 15px 0;
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Link Styling */
+a {
+    color: #3498db; /* Link color */
+    text-decoration: none; /* Removed default underline */
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline; /* Adds underline on hover for UX */
+    color: #2980b9;
+}
+
+/* Emphasis Styling (using existing tags) */
+b {
+    color: #c0392b; /* Adds extra emphasis to bolded items */
+}
+
+i {
+    font-style: italic;
+}

@@ -1,0 +1,45 @@
+Task Manager: MVC Responsibilities:
+
+1. Models
+The Model represents the application's software entities and business logic. It encapsulates the data and defines the rules for manipulating that data.
+
+Task Model: Defines the structure of a task, including attributes such as task_id, title, description, assigned_user, and completion_status.
+
+User Model: Defines user entities with attributes like username, password, and role (Admin vs. Regular User).
+
+Data Persistence: Handles the logic for saving and retrieving data from database.
+
+Business Logic: Implements rules such as ensuring only Admins can delete tasks or register new users.
+
+
+2. Views
+Views are responsible for presenting the application's data to the user and receiving user input.
+
+Login/Registration View: Provides the interface for users to access the system and for Admins to register new users.
+
+Dashboard View: Displays available actions.
+
+For Admins: Shows "Register user", "Delete task" and "Completed Tasks" across the whole system, along with "View all", "Add task", "View my tasks", and "Edit my tasks"
+
+For Users: Shows "View all", "Add task", "View my tasks", and "Edit my tasks"
+
+Task Form View: Accepts commands and data from the user to add or edit tasks.
+
+Feedback Presentation: Displays success or error messages (e.g., "Task updated successfully" or "Access Denied").
+
+
+3. Controllers
+Controllers act as intermediaries, receiving user input from views and invoking actions on the models.
+
+Authentication Controller: Validates login credentials and determines if the actor is an Admin or a Regular User.
+
+Task Controller:
+
+Processes requests to "View All," "View Completed," or "View Account Specific" tasks.
+
+Handles the logic for adding or editing tasks based on the current user's permissions.
+
+Admin Controller: Specifically manages high-level requests such as registering new users or deleting tasks from the file system.
+
+Update Coordinator: Updates the views based on changes made in the models to ensure the UI reflects the most recent file data.
+
