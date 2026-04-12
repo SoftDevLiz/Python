@@ -1,0 +1,23 @@
+{% extends "news/base.html" %}
+
+{% block title %}Delete Article – NewsApp{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Delete Article</h1>
+    <p>This action cannot be undone.</p>
+</div>
+
+<div class="card">
+    <p>Are you sure you want to delete the article:</p>
+    <br>
+    <h2>{{ article.title }}</h2>
+    <div class="meta">By {{ article.author.get_full_name|default:article.author.username }} &middot; {{ article.created_at|date:"F j, Y" }}</div>
+    <br>
+    <form method="post" style="display:flex; gap:0.75rem;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete Permanently</button>
+        <a href="{% url 'article_detail' article.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

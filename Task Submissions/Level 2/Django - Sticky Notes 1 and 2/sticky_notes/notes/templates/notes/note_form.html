@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form-card">
+    <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Note</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save-btn">Stick It!</button>
+    </form>
+    <br>
+    <a href="{% url 'note_list' %}">Cancel</a>
+</div>
+{% endblock %}

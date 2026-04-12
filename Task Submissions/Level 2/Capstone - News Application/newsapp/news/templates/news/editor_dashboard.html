@@ -1,0 +1,82 @@
+{% extends "news/base.html" %}
+
+{% block title %}Editor Dashboard – NewsApp{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Editor Dashboard</h1>
+    <p>Review and approve submitted articles before they go live.</p>
+</div>
+
+<!-- Pending Articles -->
+<h2 style="margin-bottom:1rem; font-size:1.4rem;">
+    ⏳ Pending Review
+    <span style="font-size:1rem; font-weight:normal; color:#888; font-family:Arial,sans-serif;">
+        ({{ pending_articles|length }} article{{ pending_articles|length|pluralize }})
+    </span>
+</h2>
+
+{% if pending_articles %}
+    {% for article in pending_articles %}
+    <div class="card" style="border-left: 4px solid #ffc107;">
+        <h3>
+            <a href="{% url 'article_detail' article.pk %}" style="color:#1a1a2e; text-decoration:none;">
+                {{ article.title }}
+            </a>
+        </h3>
+        <div class="meta">
+            By <strong>{{ article.author.get_full_name|default:article.author.username }}</strong>
+            {% if article.publisher %} &middot; {{ article.publisher.name }}{% endif %}
+            &middot; Submitted {{ article.created_at|date:"F j, Y" }}
+        </div>
+        <p>{{ article.content|truncatewords:30 }}</p>
+        <br>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary">Read Full Article</a>
+            <form method="post" action="{% url 'approve_article' article.pk %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">✓ Approve & Publish</button>
+            </form>
+            <a href="{% url 'article_edit' article.pk %}" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <p>🎉 No articles pending review. All caught up!</p>
+    </div>
+{% endif %}
+
+<!-- Already Approved -->
+<h2 style="margin: 2rem 0 1rem; font-size:1.4rem;">
+    ✓ Published Articles
+    <span style="font-size:1rem; font-weight:normal; color:#888; font-family:Arial,sans-serif;">
+        ({{ approved_articles|length }})
+    </span>
+</h2>
+
+{% if approved_articles %}
+    {% for article in approved_articles %}
+    <div class="card" style="border-left: 4px solid #28a745;">
+        <h3>
+            <a href="{% url 'article_detail' article.pk %}" style="color:#1a1a2e; text-decoration:none;">
+                {{ article.title }}
+            </a>
+        </h3>
+        <div class="meta">
+            By <strong>{{ article.author.get_full_name|default:article.author.username }}</strong>
+            &middot; Approved by {{ article.approved_by.username|default:"unknown" }}
+            on {{ article.approved_at|date:"F j, Y"|default:"–" }}
+        </div>
+        <div style="display:flex; gap:0.75rem; margin-top:0.75rem;">
+            <a href="{% url 'article_detail' article.pk %}" class="btn btn-primary">View</a>
+            <a href="{% url 'article_edit' article.pk %}" class="btn btn-secondary">Edit</a>
+            <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card"><p>No articles have been approved yet.</p></div>
+{% endif %}
+{% endblock %}

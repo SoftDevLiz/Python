@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Your Store | EMPORIUM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .navbar { background-color: #6c63ff; }
+        .store-card { max-width: 500px; margin: 80px auto; border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .btn-primary { background-color: #6c63ff; border: none; padding: 12px; border-radius: 8px; font-weight: 600; }
+        .btn-primary:hover { background-color: #5751d9; }
+        .form-control:focus { border-color: #6c63ff; box-shadow: 0 0 0 0.25 cold rgba(108, 99, 255, 0.25); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">EMPORIUM</a>
+        <span class="navbar-text text-white">Seller Dashboard</span>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="container">
+    <div class="card store-card p-4 p-md-5">
+        <div class="text-center mb-4">
+            <div class="display-6 fw-bold" style="color: #6c63ff;">🚀</div>
+            <h2 class="fw-bold mt-2">Open Your Store</h2>
+            <p class="text-muted">Give your business a name and start reaching customers.</p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Store Name</label>
+                <input type="text" name="store_name" class="form-control form-control-lg" placeholder="e.g. The Vintage Vault" required>
+                <div class="form-text">Choose something memorable! You can change this later.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 shadow-sm">Launch My Store</button>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'home' %}" class="text-decoration-none text-muted small">← Back to Home</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

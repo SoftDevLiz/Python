@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Django
+db.sqlite3
+*.log
+
+# Static files (ANYWHERE in the repo)
+staticfiles/
+**/staticfiles/
+
+# Ignore Django admin static if copied
+**/static/admin/
+
+# Node
+node_modules/
+
+# Build
+dist/
+build/
+
+# Env files
+.env
+
+*.zip
+
+*.pdf

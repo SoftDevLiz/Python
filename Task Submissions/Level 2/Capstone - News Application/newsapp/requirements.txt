@@ -1,0 +1,17 @@
+# News Application – Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core Django framework
+Django==5.0.6
+
+# Django REST Framework – for building the RESTful API
+djangorestframework==3.15.2
+
+# JWT authentication for the API
+djangorestframework-simplejwt==5.3.1
+
+# MariaDB / MySQL database driver
+mysqlclient==2.2.4
+
+# HTTP client used by signals.py to POST to /api/approved/
+requests==2.32.3

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="sticky-container">
+    {% for note in notes %}
+        <div class="sticky-note">
+            <a href="{% url 'note_detail' pk=note.pk %}" class="pin"></a>
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.content|truncatewords:20 }}</p>
+            <div class="actions">
+                <a href="{% url 'note_update' pk=note.pk %}">Edit</a>
+                <a href="{% url 'note_delete' pk=note.pk %}" class="delete">Delete</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No notes yet. Click "+ New Note" to start!</p>
+    {% endfor %}
+</div>
+{% endblock %}

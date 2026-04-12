@@ -1,0 +1,41 @@
+{% extends "news/base.html" %}
+
+{% block title %}{{ article.title }} – NewsApp{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ article.title }}</h1>
+    <p class="meta" style="font-family:Arial,sans-serif; color:#666; margin-top:0.5rem;">
+        By <strong>{{ article.author.get_full_name|default:article.author.username }}</strong>
+        {% if article.publisher %} &middot; {{ article.publisher.name }}{% endif %}
+        &middot; {{ article.created_at|date:"F j, Y" }}
+        {% if article.approved %}
+            <span class="badge badge-success">✓ Approved</span>
+        {% else %}
+            <span class="badge badge-warning">⏳ Pending Approval</span>
+        {% endif %}
+    </p>
+</div>
+
+<div class="card">
+    <div style="white-space: pre-wrap; line-height: 1.9;">{{ article.content }}</div>
+</div>
+
+{% if user.is_authenticated %}
+<div style="margin-top:1rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+    {% if user.role == 'editor' or user == article.author %}
+        <a href="{% url 'article_edit' article.pk %}" class="btn btn-secondary">Edit Article</a>
+        <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
+    {% endif %}
+    {% if user.role == 'editor' and not article.approved %}
+        <form method="post" action="{% url 'approve_article' article.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">✓ Approve & Publish</button>
+        </form>
+    {% endif %}
+</div>
+{% endif %}
+
+<br>
+<a href="{% url 'home' %}" class="btn btn-primary">← Back to Home</a>
+{% endblock %}

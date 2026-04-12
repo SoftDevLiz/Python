@@ -1,0 +1,101 @@
+{% extends "news/base.html" %}
+
+{% block title %}My Profile – NewsApp{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>My Profile</h1>
+    <p>
+        Logged in as <strong>{{ user.username }}</strong>
+        <span class="role-badge">{{ user.role }}</span>
+        {% if user.publisher %} &mdash; {{ user.publisher.name }}{% endif %}
+    </p>
+</div>
+
+<!-- READER: subscription management -->
+{% if user.role == 'reader' %}
+    <h2 style="margin-bottom:1rem;">My Subscriptions</h2>
+    <div class="card">
+        <p style="margin-bottom:1rem; font-family:Arial,sans-serif; font-size:0.9rem; color:#555;">
+            Select the publishers and journalists you want to follow. You'll receive email
+            notifications when they publish new approved articles.
+        </p>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in subscription_form %}
+                <div class="form-group">
+                    <label style="font-size:1.05rem;">{{ field.label }}</label>
+                    {% if field.help_text %}
+                        <div class="helptext">{{ field.help_text }}</div>
+                    {% endif %}
+                    <div style="margin-top:0.5rem; columns: 2; column-gap: 1rem;">
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-gold">Save Subscriptions</button>
+        </form>
+    </div>
+{% endif %}
+
+<!-- JOURNALIST: their own content -->
+{% if user.role == 'journalist' %}
+    <h2 style="margin-bottom:1rem;">My Articles</h2>
+    {% if my_articles %}
+        {% for article in my_articles %}
+        <div class="card">
+            <h3>
+                <a href="{% url 'article_detail' article.pk %}" style="color:#1a1a2e;text-decoration:none;">
+                    {{ article.title }}
+                </a>
+            </h3>
+            <div class="meta">
+                {{ article.created_at|date:"F j, Y" }}
+                {% if article.approved %}
+                    <span class="badge badge-success">✓ Published</span>
+                {% else %}
+                    <span class="badge badge-warning">⏳ Pending</span>
+                {% endif %}
+            </div>
+            <div style="margin-top:0.75rem; display:flex; gap:0.5rem;">
+                <a href="{% url 'article_edit' article.pk %}" class="btn btn-secondary">Edit</a>
+                <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="card"><p>You haven't written any articles yet. <a href="{% url 'article_create' %}">Write one now!</a></p></div>
+    {% endif %}
+
+    <h2 style="margin: 2rem 0 1rem;">My Newsletters</h2>
+    {% if my_newsletters %}
+        {% for newsletter in my_newsletters %}
+        <div class="card">
+            <h3>
+                <a href="{% url 'newsletter_detail' newsletter.pk %}" style="color:#1a1a2e;text-decoration:none;">
+                    {{ newsletter.title }}
+                </a>
+            </h3>
+            <div class="meta">{{ newsletter.created_at|date:"F j, Y" }} &middot; {{ newsletter.articles.count }} articles</div>
+            <a href="{% url 'newsletter_edit' newsletter.pk %}" class="btn btn-secondary" style="margin-top:0.75rem;">Edit</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="card"><p>No newsletters yet. <a href="{% url 'newsletter_create' %}">Create one!</a></p></div>
+    {% endif %}
+{% endif %}
+
+<!-- EDITOR: link to dashboard -->
+{% if user.role == 'editor' %}
+    <div class="card">
+        <p>As an editor, your workspace is the <strong>Editor Dashboard</strong>.</p>
+        <br>
+        <a href="{% url 'editor_dashboard' %}" class="btn btn-gold">Go to Editor Dashboard</a>
+    </div>
+{% endif %}
+{% endblock %}
