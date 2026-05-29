@@ -30,9 +30,8 @@ build/
 
 *.zip
 
-.pdf
-SE Task Submissions/Level 3/03-010 Containers – Docker.pdf
 .gitignore
+SE Task Submissions/Level 3/03-010 Containers – Docker.pdf
 SE Task Submissions/Level 2/Web Development Overview/WebFundementals.pdf
 SE Task Submissions/Level 2/Web Development Overview/05-001-1 Web Development Overview.pdf
 SE Task Submissions/Level 2/Unit Testing/03-019 Unit Testing.pdf

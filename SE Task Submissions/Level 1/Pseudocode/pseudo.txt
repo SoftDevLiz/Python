@@ -1,0 +1,44 @@
+1.
+
+While user input != 0:
+	ask user for positive number
+
+if user input == 0:
+	sort numbers
+	find largest
+	print largest
+
+2. 
+
+set first_name to empty string
+ask user to input their name and save to first_name
+print(f"{first_name} Hello, World!")
+
+3.
+
+Read list of integers
+count length of list
+sum all integers
+return sum/count
+
+4.
+
+Read grocery list
+
+For product in list:
+
+	if product.bought == False:
+		add to To Buy list
+
+sort To Buy list alphabetically
+print To Buy list
+
+5.
+
+Read x and y
+
+s = x + y
+a = s / 2
+p = x * y
+
+print(f"{s}, {a}, {p}")
