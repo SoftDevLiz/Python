@@ -1,3 +1,1 @@
 admin, adm1n
-liz, liz
-ash, ash
