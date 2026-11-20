@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ store.name }} | Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .sidebar { background: #212529; min-height: 100vh; color: white; padding-top: 20px; }
+        .main-content { padding: 40px; }
+        .stat-card { border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .btn-add { background-color: #6c63ff; color: white; border: none; }
+        /* Style for the delete button in sidebar */
+        .btn-delete-sidebar { color: #ff6b6b; text-decoration: none; font-size: 0.9rem; background: none; border: none; padding: 0; }
+        .btn-delete-sidebar:hover { color: #ff0000; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 sidebar d-none d-md-block">
+            <div class="text-center mb-4">
+                <h4 class="fw-bold">EMPORIUM</h4>
+                <small class="text-muted">Seller Panel</small>
+            </div>
+            <ul class="nav flex-column px-3">
+                <li class="nav-item mb-3"><a href="{% url 'home' %}" class="text-white text-decoration-none">🏠 Home</a></li>
+                <li class="nav-item mb-3"><strong>📊 Dashboard</strong></li>
+                
+                <li class="nav-item mt-5">
+                    <hr class="text-muted">
+                    <form action="{% url 'delete_store' %}" method="POST" onsubmit="return confirm('WARNING: This will permanently delete your store. Are you sure?')">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-delete-sidebar">⚠️ Close Store</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="col-md-10 main-content">
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Welcome to <span style="color: #6c63ff;">{{ store.name }}</span></h2>
+                <a href="{% url 'add_product' %}" class="btn btn-add px-4 py-2">+ Add New Product</a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card stat-card p-4">
+                        <h6 class="text-muted">Total Products</h6>
+                        <h3>{{ products.count }}</h3> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="card stat-card p-4 mt-2">
+                <h5>Inventory</h5>
+                <hr>
+                {% if products %}
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr>
+                                <td><strong>{{ product.name }}</strong></td>
+                                <td>R{{ product.price }}</td>
+                                <td>{{ product.stock }} units</td>
+                                <td class="text-end">
+                                    <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                                    <form action="{% url 'delete_product' product.id %}" method="POST" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-center text-muted py-5">You haven't added any products yet. Click the button above to start!</p>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

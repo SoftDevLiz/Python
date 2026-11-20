@@ -1,0 +1,109 @@
+body {
+    background: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-family: 'Permanent Marker', cursive;
+    color: #333;
+}
+
+/* Grid Layout */
+.sticky-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* The Sticky Note Look */
+.sticky-note {
+    background: #fffd75;
+    padding: 20px;
+    min-height: 200px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+    transform: rotate(-2deg);
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.sticky-note:nth-child(even) {
+    transform: rotate(2deg);
+    background: #cfeffc; /* Alternating colors */
+}
+
+.sticky-note:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 10;
+}
+
+/* Push Pin Effect */
+.pin {
+    background-color: #f00;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+}
+
+.sticky-note h3 {
+    font-family: 'Permanent Marker', cursive;
+    margin-top: 15px;
+}
+
+.actions {
+    margin-top: 20px;
+    font-size: 0.8em;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #555;
+    margin-right: 10px;
+}
+
+.actions a.delete {
+    color: #c00;
+}
+
+/* Form Styling */
+.form-card {
+    background: white;
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.save-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.detail-view {
+    margin: 0 auto;
+    max-width: 400px;
+    transform: rotate(0deg) !important; /* Keep it straight for easier reading */
+    font-size: 1.2em;
+}
+
+.detail-view hr {
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    margin: 10px 0;
+}

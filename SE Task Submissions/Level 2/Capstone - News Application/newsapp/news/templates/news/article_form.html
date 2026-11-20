@@ -1,0 +1,38 @@
+{% extends "news/base.html" %}
+
+{% block title %}{{ action }} Article – NewsApp{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ action }} Article</h1>
+    {% if action == 'Create' %}
+        <p>Write your article below. It will be reviewed by an editor before publishing.</p>
+    {% else %}
+        <p>Editing: <em>{{ article.title }}</em></p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="helptext">{{ field.help_text }}</div>
+                {% endif %}
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div style="display:flex; gap:0.75rem; margin-top:1rem;">
+            <button type="submit" class="btn btn-gold">{{ action }} Article</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "news/base.html" %}
+
+{% block title %}Register – NewsApp{% endblock %}
+
+{% block content %}
+<div style="max-width:500px; margin:0 auto;">
+    <div class="page-header">
+        <h1>Create an Account</h1>
+        <p>Join NewsApp to read, subscribe, and write.</p>
+    </div>
+
+    <div class="card">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <div class="helptext">{{ field.help_text }}</div>
+                    {% endif %}
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-gold" style="width:100%; padding:0.7rem;">Create Account</button>
+        </form>
+    </div>
+
+    <p style="text-align:center; font-family:Arial,sans-serif; font-size:0.9rem; color:#666; margin-top:1rem;">
+        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Online Store</title>
+    <style>
+        /* Task Requirement: Custom CSS to change image on hover [cite: 469] */
+        .product-card img {
+            transition: all 0.3s ease-in-out;
+        }
+        .product-card img:hover {
+            transform: scale(1.08); /* Scaling the image [cite: 469] */
+            filter: brightness(80%);
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-5">Our Catalog</h1>
+
+        <div class="row g-4">
+            
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Razer_Naga_2014_MMO_Gaming_Mouse_%2814714867599%29.jpg/1280px-Razer_Naga_2014_MMO_Gaming_Mouse_%2814714867599%29.jpg" class="img-fluid mb-3" alt="Product 1"> 
+                    <h6>Gaming Mouse</h6>
+                    <p class="text-primary fw-bold">R 450.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button> 
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtTft_3depqwX3Z4yixLyegJqbWT15lVNzdw&s" class="img-fluid mb-3" alt="Product 2">
+                    <h6>Mechanical Keyboard</h6>
+                    <p class="text-primary fw-bold">R 1,200.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNc5GiIAu4wlJwaChstdYrx9niEwQ51Kkkog&s" class="img-fluid mb-3" alt="Product 3">
+                    <h6>HD Monitor</h6>
+                    <p class="text-primary fw-bold">R 3,500.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://www.geewiz.co.za/24958-large_default/logitech-960-001055-usb-hd-pro-c920-webcam-with-auto-focus-and-microphone-black.jpg" class="img-fluid mb-3" alt="Product 4">
+                    <h6>Webcam 1080p</h6>
+                    <p class="text-primary fw-bold">R 850.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://media.rs-online.com/Y2566909-01.jpg" class="img-fluid mb-3" alt="Product 5">
+                    <h6>USB-C Hub</h6>
+                    <p class="text-primary fw-bold">R 600.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://m.media-amazon.com/images/I/71yqoFp54WS._AC_UF1000,1000_QL80_.jpg" class="img-fluid mb-3" alt="Product 6">
+                    <h6>Wireless Headset</h6>
+                    <p class="text-primary fw-bold">R 1,800.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://www.titan-ice.co.za/images/detailed/52/613OPZj-feL._AC_SL1500_.jpg" class="img-fluid mb-3" alt="Product 7">
+                    <h6>Laptop Stand</h6>
+                    <p class="text-primary fw-bold">R 350.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc_hiyk2loo1lc7lr7pOHDkAfQaEG9Uc9gqw&s" class="img-fluid mb-3" alt="Product 8">
+                    <h6>Smart Watch</h6>
+                    <p class="text-primary fw-bold">R 2,900.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://zyrontech.com.au/cdn/shop/files/powaflex-27000mah-power-bank-builtin-cable-223401.jpg?v=1726767720" class="img-fluid mb-3" alt="Product 9">
+                    <h6>Power Bank 20k</h6>
+                    <p class="text-primary fw-bold">R 550.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="product-card text-center p-3 border rounded">
+                    <img src="https://www.kbaudio.co.uk/cdn/shop/products/edifier-r1080bt-multimedia-speaker-with-bluetooth-50-white-pair-bookshelf-speakers-edifier-black-994298.jpg?v=1702401513&width=460" class="img-fluid mb-3" alt="Product 10">
+                    <h6>Desktop Speakers</h6>
+                    <p class="text-primary fw-bold">R 1,100.00</p>
+                    <button class="btn btn-primary btn-sm">Buy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center text-md-start">
+                    <img src="https://img.freepik.com/premium-vector/logo-online-shopping-is-displayed-white-background_936990-637.jpg?semt=ais_incoming&w=740&q=80" alt="Logo" class="img-fluid"> </div>
+                <div class="col-md-10">
+                    <form class="row g-2"> <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="col-md-5">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-dark w-100">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

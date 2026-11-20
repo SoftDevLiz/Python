@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | My Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f8f9fa; }
+        .navbar { background-color: #6c63ff; }
+        .hero-section { padding: 60px 0; background: white; border-bottom: 1px solid #eee; }
+        .btn-custom { background-color: #6c63ff; color: white; border-radius: 8px; }
+        .btn-custom:hover { background-color: #5751d9; color: white; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">EMPORIUM</a>
+        
+        <div class="d-flex align-items-center">
+            <a href="{% url 'view_cart' %}" class="btn btn-link text-white me-3 position-relative p-0">
+                <i class="bi bi-cart3 fs-4"></i>
+                {% if request.session.cart %}
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+                        {{ request.session.cart|length }}
+                    </span>
+                {% endif %}
+            </a>
+
+            {% if user.is_authenticated %}
+                <span class="text-white me-3 d-none d-md-inline">Hi, {{ user.username }}!</span>
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-light">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-sm btn-outline-light">Login</a>
+                <a href="{% url 'register' %}" class="btn btn-sm btn-light ms-2">Register</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Welcome to the Marketplace</h1>
+        <p class="lead text-muted">Find amazing products or start selling your own today.</p>
+        
+        {% if user.is_authenticated %}
+            <div class="mt-4">
+                {% if user.groups.all.0.name == 'Sellers' %}
+                {% if has_store %}
+                    <a href="{% url 'dashboard' %}" class="btn btn-custom btn-lg">Go to My Dashboard</a>
+                {% else %}
+                    <a href="{% url 'create_store' %}" class="btn btn-custom btn-lg">Open My Store</a>
+                {% endif %}
+                {% else %}
+                    <a href="#" class="btn btn-custom btn-lg">Start Shopping</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+<div class="container mt-5">
+    <h3 class="fw-bold mb-4">Latest Arrivals</h3>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 shadow-sm border-0" style="border-radius: 12px;">
+                <div style="height: 200px; background: #eee; border-radius: 12px 12px 0 0;" class="d-flex align-items-center justify-content-center">
+                    <span class="text-muted">No Image</span>
+                </div>
+                
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">{{ product.name }}</h5>
+                    <p class="card-text text-muted small">{{ product.description|truncatechars:60 }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="fw-bold text-primary">R{{ product.price }}</span>
+                        <span class="badge bg-light text-dark border">{{ product.store.name }}</span>
+                    </div>
+                </div>
+        <div class="card-footer bg-white border-0 pb-3">
+            <div class="d-grid gap-2">
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-dark btn-sm">View Details</a>
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-sm" style="background-color: #6c63ff; color: white;">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <p class="text-muted">No products found. Be the first to list something!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    </div>
+</div>
+
+</body>
+</html>

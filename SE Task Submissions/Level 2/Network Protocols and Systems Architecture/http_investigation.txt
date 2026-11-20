@@ -1,0 +1,124 @@
+﻿Basic Request:
+Invoke-WebRequest -Uri https://httpbin.org/get -Verbose  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Request Headers: 
+
+
+"headers": {
+                        "Host": "httpbin.org",
+                        "User-Agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-ZA)
+                    WindowsPowerShell/5.1.19041.6456",
+                        "X-Amzn-Trace-Id": "Root=1-69d11...
+
+
+Response Headers:
+
+
+RawContent        : HTTP/1.1 200 OK
+                    Connection: keep-alive
+                    Access-Control-Allow-Origin: *
+                    Access-Control-Allow-Credentials: true
+                    Content-Length: 304
+                    Content-Type: application/json
+                    Date: Sat, 04 Apr 2026 14:18:30 GM...
+
+
+HTTP Status code:
+
+
+StatusCode        : 200
+
+
+Connection Workflow:
+
+
+Standard Request/Response Cycle
+
+
+POST Request:
+Invoke-WebRequest -Uri "https://httpbin.org/post" -Method Post -ContentType "application/x-www-form-urlencoded" -Body "key=value"  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+POST vs GET:
+
+
+* GET is primarily used to request or retrieve data from a server, and the parameters are usually visible in the URL.
+* POST is used to send or "post" data to a server to be processed, such as submitting a form or uploading a file.
+
+
+Unlike GET, a POST request includes a body (payload) that contains the data being sent.
+
+
+ The Purpose of the Payload (key=value):
+* Purpose: The payload is the actual information you want the server to process. In this case, key=value is a simple piece of data representing a form field and its input.
+* Transmission: This data is transmitted in the body of the HTTP message, not the header . Because it is in the body, it is handled separately from the URL and request metadata.
+Observing the Response Body:
+When you run the POST command to httpbin.org/post, the server sends back a JSON response:
+ "args": {},
+                      "data": "",
+                      "files": {},
+                      "form": {
+                        "key": "value"
+                      },
+Status Code Exploration:
+404 (Page not found because nothing exists at that URL address)
+  
+
+403 (Forbidden because my client does not have authorization to access that URL address)

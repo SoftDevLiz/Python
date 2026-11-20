@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Note Details - {{ note.title }}
+{% endblock %}
+
+{% block content %}
+<div class="sticky-container">
+    <div class="sticky-note detail-view">
+        <div class="pin"></div> <h3>{{ note.title }}</h3>
+        <hr>
+        <p>{{ note.content }}</p>
+        
+        <div class="actions">
+            <a href="{% url 'note_update' pk=note.pk %}">Edit This Note</a>
+            <a href="{% url 'note_delete' pk=note.pk %}" class="delete">Delete Note</a>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a href="{% url 'note_list' %}">← Back to All Notes</a>
+</div>
+{% endblock %}
